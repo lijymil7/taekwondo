@@ -1,0 +1,92 @@
+spring:
+  profiles:
+#    active: prod
+#    active: dev
+    active: local
+---
+# prod
+spring:
+  datasource:
+    driver-class-name: net.sf.log4jdbc.sql.jdbcapi.DriverSpy
+    url: jdbc:log4jdbc:mysql://baby-smart-home-ops-db-info:3306/TAEKWONDO_PROD
+    username: taekwondo_prod
+    password: taekwondo_prod
+
+    dbcp2:
+      validation-query:  SELECT 1 FROM dual
+      default-auto-commit: false
+      initial-size: 1
+      max-total: 200
+      max-idle: 200
+      max-wait-millis: 30000
+
+  config:
+    activate:
+      on-profile: prod
+
+server:
+  port: 8080
+
+---
+# dev
+spring:
+  datasource:
+    driver-class-name: net.sf.log4jdbc.sql.jdbcapi.DriverSpy
+    url: jdbc:log4jdbc:mysql://midas-dev.cc5qnr5qomwj.ap-northeast-2.rds.amazonaws.com:3306/TAEKWONDO_DEV
+    username: taekwondo_dev
+    password: taekwondo_dev
+
+    dbcp2:
+      validation-query:  SELECT 1 FROM dual
+      default-auto-commit: false
+      initial-size: 1
+      max-total: 200
+      max-idle: 200
+      max-wait-millis: 30000
+
+  config:
+    activate:
+      on-profile: dev
+
+server:
+  port: 8050
+
+---
+# local
+spring:
+  datasource:
+    driver-class-name: net.sf.log4jdbc.sql.jdbcapi.DriverSpy
+    url: jdbc:log4jdbc:mysql://midas-dev.cc5qnr5qomwj.ap-northeast-2.rds.amazonaws.com:3306/TAEKWONDO_DEV
+    username: taekwondo_dev
+    password: taekwondo_dev
+
+    dbcp2:
+      validation-query:  SELECT 1 FROM dual
+      default-auto-commit: false
+      initial-size: 1
+      max-total: 200
+      max-idle: 200
+      max-wait-millis: 30000
+
+  config:
+    activate:
+      on-profile: local
+
+server:
+  port: 8050
+
+---
+spring:
+  main:
+    allow-bean-definition-overriding: true
+
+  jmx:
+    enabled: false
+
+  servlet:
+    multipart:
+      max-file-size: 100MB
+
+mybatis:
+  mapper-locations: mybatis/mapper/*.xml
+  config-location: classpath:mybatis/mybatis-config.xml

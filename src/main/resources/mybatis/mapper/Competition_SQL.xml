@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.midashnt.taekwondo.app.mapper.CompetitionMapper">
+
+    <insert id="createCompetition" parameterType="Competition">
+        INSERT INTO TB_COMPETITION( COMPETITION_CLASSIFICATION
+                                  , COMPETITION_NAME_KO
+                                  , COMPETITION_NAME_EN
+                                  , COMPETITION_GRADE
+                                  , COMPETITION_HOST_INSTITUTION_KO
+                                  , COMPETITION_HOST_INSTITUTION_EN
+                                  , COMPETITION_START_DATE
+                                  , COMPETITION_END_DATE
+                                  , REGISTRATION_START_DATE
+                                  , REGISTRATION_END_DATE
+                                  , CORRECTION_START_DATE
+                                  , CORRECTION_END_DATE
+                                  , COMPETITION_HOMEPAGE
+                                  , COMPETITION_LOGO_PATH
+                                  , COMPETITION_IMAGE_PATH)
+            VALUE (#{competitionClassification}, #{competitionNameKO}, #{competitionNameEN},
+                   #{competitionGrade}, #{competitionHostInstitutionKO}, #{competitionHostInstitutionEN},
+                   #{competitionStartDate}, #{competitionEndDate}, #{registrationStartDate},
+                   #{registrationEndDate}, #{correctionStartDate}, #{correctionEndDate},
+                   #{competitionHomepage}, #{competitionLogoPath}, #{competitionImagePath})
+    </insert>
+
+    <update id="updateCompetition" parameterType="Competition">
+        UPDATE TB_COMPETITION
+        SET COMPETITION_INDEX = #{competitionIndex}
+        <if test="competitionClassification != null and !competitionClassification.equals('')">
+            , COMPETITION_CLASSIFICATION = #{competitionClassification}
+        </if>
+        <if test="competitionNameKO != null and !competitionNameKO.equals('')">
+            , COMPETITION_NAME_KO = #{competitionNameKO}
+        </if>
+        , COMPETITION_NAME_EN = #{competitionNameEN}
+        , COMPETITION_GRADE = #{competitionGrade}
+        <if test="competitionHostInstitutionKO != null and !competitionHostInstitutionKO.equals('')">
+            , COMPETITION_HOST_INSTITUTION_KO = #{competitionHostInstitutionKO}
+        </if>
+        , COMPETITION_HOST_INSTITUTION_EN = #{competitionHostInstitutionEN}
+        <if test="competitionStartDate != null and !competitionStartDate.equals('')">
+            , COMPETITION_START_DATE = #{competitionStartDate}
+        </if>
+        <if test="competitionEndDate != null and !competitionEndDate.equals('')">
+            , COMPETITION_END_DATE = #{competitionEndDate}
+        </if>
+        <if test="registrationStartDate != null and !registrationStartDate.equals('')">
+            , REGISTRATION_START_DATE = #{registrationStartDate}
+        </if>
+        <if test="registrationEndDate != null and !registrationEndDate.equals('')">
+            , REGISTRATION_END_DATE = #{registrationEndDate}
+        </if>
+        <if test="correctionStartDate != null and !correctionStartDate.equals('')">
+            , CORRECTION_START_DATE = #{correctionStartDate}
+        </if>
+        <if test="correctionEndDate != null and !correctionEndDate.equals('')">
+            , CORRECTION_END_DATE = #{correctionEndDate}
+        </if>
+        <if test="competitionHomepage != null and !competitionHomepage.equals('')">
+            ,COMPETITION_HOMEPAGE = #{competitionHomepage}
+        </if>
+        <if test="competitionLogoPath != null and !competitionLogoPath.equals('')">
+            , COMPETITION_LOGO_PATH = #{competitionLogoPath}
+        </if>
+        <if test="competitionImagePath != null and !competitionImagePath.equals('')">
+            , COMPETITION_IMAGE_PATH = #{competitionImagePath}
+        </if>
+        WHERE COMPETITION_INDEX = #{competitionIndex}
+    </update>
+
+    <select id="getCompetitionByIndex" parameterType="int" resultType="Competition">
+        SELECT COMPETITION_INDEX               competitionIndex
+             , COMPETITION_CLASSIFICATION      competitionClassification
+             , COMPETITION_NAME_KO             competitionNameKO
+             , COMPETITION_NAME_EN             competitionNameEN
+             , COMPETITION_GRADE               competitionGrade
+             , COMPETITION_HOST_INSTITUTION_KO competitionHostInstitutionKO
+             , COMPETITION_HOST_INSTITUTION_EN competitionHostInstitutionEN
+             , COMPETITION_START_DATE          competitionStartDate
+             , COMPETITION_END_DATE            competitionEndDate
+             , REGISTRATION_START_DATE         registrationStartDate
+             , REGISTRATION_END_DATE           registrationEndDate
+             , CORRECTION_START_DATE           correctionStartDate
+             , CORRECTION_END_DATE             correctionEndDate
+             , COMPETITION_HOMEPAGE            competitionHomepage
+             , COMPETITION_LOGO_PATH           competitionLogoPath
+             , COMPETITION_IMAGE_PATH          competitionImagePath
+        FROM TB_COMPETITION
+        WHERE COMPETITION_INDEX = #{competitionIndex}
+    </select>
+
+    <select id="getCompetitionListByCompetitionClassification" parameterType="String" resultType="Competition">
+        SELECT COMPETITION_INDEX               competitionIndex
+             , COMPETITION_CLASSIFICATION      competitionClassification
+             , COMPETITION_NAME_KO             competitionNameKO
+             , COMPETITION_NAME_EN             competitionNameEN
+             , COMPETITION_GRADE               competitionGrade
+             , COMPETITION_HOST_INSTITUTION_KO competitionHostInstitutionKO
+             , COMPETITION_HOST_INSTITUTION_EN competitionHostInstitutionEN
+             , COMPETITION_START_DATE          competitionStartDate
+             , COMPETITION_END_DATE            competitionEndDate
+             , REGISTRATION_START_DATE         registrationStartDate
+             , REGISTRATION_END_DATE           registrationEndDate
+             , CORRECTION_START_DATE           correctionStartDate
+             , CORRECTION_END_DATE             correctionEndDate
+             , COMPETITION_HOMEPAGE            competitionHomepage
+             , COMPETITION_LOGO_PATH           competitionLogoPath
+             , COMPETITION_IMAGE_PATH          competitionImagePath
+        FROM TB_COMPETITION
+        WHERE COMPETITION_CLASSIFICATION = #{competitionClassification}
+    </select>
+
+    <delete id="deleteCompetition" parameterType="int">
+        DELETE
+        FROM TB_COMPETITION
+        WHERE COMPETITION_INDEX = #{competitionIndex}
+    </delete>
+
+</mapper>

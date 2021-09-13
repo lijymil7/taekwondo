@@ -1,0 +1,216 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.midashnt.taekwondo.app.mapper.WeightClassMapper">
+
+    <insert id="createWeightClass" parameterType="WeightClass">
+        INSERT INTO TB_WEIGHT_CLASS( EVENT_INDEX
+                                   , WEIGHT_CLASS_NAME_KO
+                                   , WEIGHT_CLASS_NAME_EN
+                                   , ROUND_CNT
+                                   , ROUND_ONE_GAME_TIME
+                                   , ROUND_ONE_BREAK_TIME
+                                   , ROUND_ONE_DOUBLE_TARGET_MITT_CNT
+                                   , ROUND_ONE_LARGE_MITT_CNT
+                                   , ROUND_TWO_GAME_TIME
+                                   , ROUND_TWO_BREAK_TIME
+                                   , ROUND_TWO_DOUBLE_TARGET_MITT_CNT
+                                   , ROUND_TWO_LARGE_MITT_CNT
+                                   , ROUND_TREE_GAME_TIME
+                                   , ROUND_TREE_BREAK_TIME
+                                   , ROUND_TREE_DOUBLE_TARGET_MITT_CNT
+                                   , ROUND_TREE_LARGE_MITT_CNT
+                                   , ROUND_FOUR_GAME_TIME
+                                   , ROUND_FOUR_BREAK_TIME
+                                   , ROUND_FOUR_DOUBLE_TARGET_MITT_CNT
+                                   , ROUND_FOUR_LARGE_MITT_CNT
+                                   , ROUND_FIVE_GAME_TIME
+                                   , ROUND_FIVE_BREAK_TIME
+                                   , ROUND_FIVE_DOUBLE_TARGET_MITT_CNT
+                                   , ROUND_FIVE_LARGE_MITT_CNT
+                                   , WEIGHT_CLASS_ORDER)
+            VALUE (#{eventIndex}, #{weightClassNameKO}, #{weightClassNameEN}, #{roundCnt},
+                   #{roundOneGameTime}, #{roundOneBreakTime}, #{roundOneDoubleTargetMittCnt}, #{roundOneLargeMittCnt},
+                   #{roundTwoGameTime}, #{roundTwoBreakTime}, #{roundTwoDoubleTargetMittCnt}, #{roundTwoLargeMittCnt},
+                   #{roundTreeGameTime}, #{roundTreeBreakTime}, #{roundTreeDoubleTargetMittCnt}, #{roundTreeLargeMittCnt},
+                   #{roundFourGameTime}, #{roundFourBreakTime}, #{roundFourDoubleTargetMittCnt}, #{roundFourLargeMittCnt},
+                   #{roundFiveGameTime}, #{roundFiveBreakTime}, #{roundFiveDoubleTargetMittCnt}, #{roundFiveLargeMittCnt},
+                   #{weightClassOrder})
+    </insert>
+
+    <update id="updateWeightClass" parameterType="WeightClass">
+        UPDATE TB_WEIGHT_CLASS
+        SET EVENT_INDEX = #{eventIndex}
+        <if test="weightClassNameKO != null and !weightClassNameKO.equals('')">
+            , WEIGHT_CLASS_NAME_KO = #{weightClassNameKO}
+        </if>
+        , WEIGHT_CLASS_NAME_EN = #{weightClassNameEN}
+        <if test="roundCnt != 0">
+            , ROUND_CNT = #{roundCnt}
+        </if>
+        <if test="roundOneGameTime != 0">
+            , ROUND_ONE_GAME_TIME = #{roundOneGameTime}
+        </if>>
+        , ROUND_ONE_BREAK_TIME = #{roundOneBreakTime}
+        , ROUND_ONE_DOUBLE_TARGET_MITT_CNT = #{roundOneDoubleTargetMittCnt}
+        , ROUND_ONE_LARGE_MITT_CNT = #{roundOneLargeMittCnt}
+        , ROUND_TWO_GAME_TIME = #{roundTwoGameTime}
+        , ROUND_TWO_BREAK_TIME = #{roundTwoBreakTime}
+        , ROUND_TWO_DOUBLE_TARGET_MITT_CNT = #{roundTwoDoubleTargetMittCnt}
+        , ROUND_TWO_LARGE_MITT_CNT = #{roundTwoLargeMittCnt}
+        , ROUND_TREE_GAME_TIME = #{roundTreeGameTime}
+        , ROUND_TREE_BREAK_TIME = #{roundTreeBreakTime}
+        , ROUND_TREE_DOUBLE_TARGET_MITT_CNT = #{roundTreeDoubleTargetMittCnt}
+        , ROUND_TREE_LARGE_MITT_CNT = #{roundTreeLargeMittCnt}
+        , ROUND_FOUR_GAME_TIME = #{roundFourGameTime}
+        , ROUND_FOUR_BREAK_TIME = #{roundFourBreakTime}
+        , ROUND_FOUR_DOUBLE_TARGET_MITT_CNT = #{roundFourDoubleTargetMittCnt}
+        , ROUND_FOUR_LARGE_MITT_CNT = #{roundFourLargeMittCnt}
+        , ROUND_FIVE_GAME_TIME = #{roundFiveGameTime}
+        , ROUND_FIVE_BREAK_TIME = #{roundFiveBreakTime}
+        , ROUND_FIVE_DOUBLE_TARGET_MITT_CNT = #{roundFiveDoubleTargetMittCnt}
+        , ROUND_FIVE_LARGE_MITT_CNT = #{roundFiveLargeMittCnt}
+        <if test="weightClassOrder != 0">
+            , WEIGHT_CLASS_ORDER = #{weightClassOrder}
+        </if>
+        WHERE WEIGHT_CLASS_INDEX = #{weightClassIndex}
+    </update>
+
+    <select id="getWeightClassByIndex" parameterType="int" resultType="WeightClass">
+        SELECT WEIGHT_CLASS_INDEX                weightClassIndex
+             , EVENT_INDEX                       eventIndex
+             , WEIGHT_CLASS_NAME_KO              weightClassNameKO
+             , WEIGHT_CLASS_NAME_EN              weightClassNameEN
+             , ROUND_CNT                         roundCnt
+             , ROUND_ONE_GAME_TIME               roundOneGameTime
+             , ROUND_ONE_BREAK_TIME              roundOneBreakTime
+             , ROUND_ONE_DOUBLE_TARGET_MITT_CNT  roundOneDoubleTargetMittCnt
+             , ROUND_ONE_LARGE_MITT_CNT          roundOneLargeMittCnt
+             , ROUND_TWO_GAME_TIME               roundTwoGameTime
+             , ROUND_TWO_BREAK_TIME              roundTwoBreakTime
+             , ROUND_TWO_DOUBLE_TARGET_MITT_CNT  roundTwoDoubleTargetMittCnt
+             , ROUND_TWO_LARGE_MITT_CNT          roundTwoLargeMittCnt
+             , ROUND_TREE_GAME_TIME              roundTreeGameTime
+             , ROUND_TREE_BREAK_TIME             roundTreeBreakTime
+             , ROUND_TREE_DOUBLE_TARGET_MITT_CNT roundTreeDoubleTargetMittCnt
+             , ROUND_TREE_LARGE_MITT_CNT         roundTreeLargeMittCnt
+             , ROUND_FOUR_GAME_TIME              roundFourGameTime
+             , ROUND_FOUR_BREAK_TIME             roundFourBreakTime
+             , ROUND_FOUR_DOUBLE_TARGET_MITT_CNT roundFourDoubleTargetMittCnt
+             , ROUND_FOUR_LARGE_MITT_CNT         roundFourLargeMittCnt
+             , ROUND_FIVE_GAME_TIME              roundFiveGameTime
+             , ROUND_FIVE_BREAK_TIME             roundFiveBreakTime
+             , ROUND_FIVE_DOUBLE_TARGET_MITT_CNT roundFiveDoubleTargetMittCnt
+             , ROUND_FIVE_LARGE_MITT_CNT         roundFiveLargeMittCnt
+             , WEIGHT_CLASS_ORDER                weightClassOrder
+        FROM TB_WEIGHT_CLASS
+        WHERE WEIGHT_CLASS_INDEX = #{weightClassIndex}
+    </select>
+
+    <select id="getWeightClassListByEventIndex" parameterType="int" resultType="WeightClass">
+        SELECT WEIGHT_CLASS_INDEX                weightClassIndex
+             , EVENT_INDEX                       eventIndex
+             , WEIGHT_CLASS_NAME_KO              weightClassNameKO
+             , WEIGHT_CLASS_NAME_EN              weightClassNameEN
+             , ROUND_CNT                         roundCnt
+             , ROUND_ONE_GAME_TIME               roundOneGameTime
+             , ROUND_ONE_BREAK_TIME              roundOneBreakTime
+             , ROUND_ONE_DOUBLE_TARGET_MITT_CNT  roundOneDoubleTargetMittCnt
+             , ROUND_ONE_LARGE_MITT_CNT          roundOneLargeMittCnt
+             , ROUND_TWO_GAME_TIME               roundTwoGameTime
+             , ROUND_TWO_BREAK_TIME              roundTwoBreakTime
+             , ROUND_TWO_DOUBLE_TARGET_MITT_CNT  roundTwoDoubleTargetMittCnt
+             , ROUND_TWO_LARGE_MITT_CNT          roundTwoLargeMittCnt
+             , ROUND_TREE_GAME_TIME              roundTreeGameTime
+             , ROUND_TREE_BREAK_TIME             roundTreeBreakTime
+             , ROUND_TREE_DOUBLE_TARGET_MITT_CNT roundTreeDoubleTargetMittCnt
+             , ROUND_TREE_LARGE_MITT_CNT         roundTreeLargeMittCnt
+             , ROUND_FOUR_GAME_TIME              roundFourGameTime
+             , ROUND_FOUR_BREAK_TIME             roundFourBreakTime
+             , ROUND_FOUR_DOUBLE_TARGET_MITT_CNT roundFourDoubleTargetMittCnt
+             , ROUND_FOUR_LARGE_MITT_CNT         roundFourLargeMittCnt
+             , ROUND_FIVE_GAME_TIME              roundFiveGameTime
+             , ROUND_FIVE_BREAK_TIME             roundFiveBreakTime
+             , ROUND_FIVE_DOUBLE_TARGET_MITT_CNT roundFiveDoubleTargetMittCnt
+             , ROUND_FIVE_LARGE_MITT_CNT         roundFiveLargeMittCnt
+             , WEIGHT_CLASS_ORDER                weightClassOrder
+        FROM TB_WEIGHT_CLASS
+        WHERE EVENT_INDEX = #{eventIndex}
+        ORDER BY WEIGHT_CLASS_ORDER
+    </select>
+
+    <resultMap id="weightClassMap" type="Map">
+        <result column="weightClassIndex" property="weightClassIndex"/>
+        <result column="eventIndex" property="eventIndex"/>
+        <result column="weightClassNameKO" property="weightClassNameKO"/>
+        <result column="weightClassNameEN" property="weightClassNameEN"/>
+        <result column="roundCnt" property="roundCnt"/>
+        <collection property="roundOne" javaType="Map">
+            <result column="roundOneGameTime" property="roundGameTime"/>
+            <result column="roundOneBreakTime" property="roundBreakTime"/>
+            <result column="roundOneDoubleTargetMittCnt" property="roundDoubleTargetMittCnt"/>
+            <result column="roundOneLargeMittCnt" property="roundLargeMittCnt"/>
+        </collection>
+        <collection property="roundTwo" javaType="Map">
+            <result column="roundTwoGameTime" property="roundGameTime"/>
+            <result column="roundTwoBreakTime" property="roundBreakTime"/>
+            <result column="roundTwoDoubleTargetMittCnt" property="roundDoubleTargetMittCnt"/>
+            <result column="roundTwoLargeMittCnt" property="roundLargeMittCnt"/>
+        </collection>
+        <collection property="roundTree" javaType="Map">
+            <result column="roundTreeGameTime" property="roundGameTime"/>
+            <result column="roundTreeBreakTime" property="roundBreakTime"/>
+            <result column="roundTreeDoubleTargetMittCnt" property="roundDoubleTargetMittCnt"/>
+            <result column="roundTreeLargeMittCnt" property="roundLargeMittCnt"/>
+        </collection>
+        <collection property="roundFour" javaType="Map">
+            <result column="roundFourGameTime" property="roundGameTime"/>
+            <result column="roundFourBreakTime" property="roundBreakTime"/>
+            <result column="roundFourDoubleTargetMittCnt" property="roundDoubleTargetMittCnt"/>
+            <result column="roundFourLargeMittCnt" property="roundLargeMittCnt"/>
+        </collection>
+        <collection property="roundFive" javaType="Map">
+            <result column="roundFiveGameTime" property="roundGameTime"/>
+            <result column="roundFiveBreakTime" property="roundBreakTime"/>
+            <result column="roundFiveDoubleTargetMittCnt" property="roundDoubleTargetMittCnt"/>
+            <result column="roundFiveLargeMittCnt" property="roundLargeMittCnt"/>
+        </collection>
+    </resultMap>
+
+    <select id="getWeightClassMapListByEventIndex" parameterType="int" resultMap="weightClassMap">
+        SELECT WEIGHT_CLASS_INDEX                weightClassIndex
+             , EVENT_INDEX                       eventIndex
+             , WEIGHT_CLASS_NAME_KO              weightClassNameKO
+             , WEIGHT_CLASS_NAME_EN              weightClassNameEN
+             , ROUND_CNT                         roundCnt
+             , ROUND_ONE_GAME_TIME               roundOneGameTime
+             , ROUND_ONE_BREAK_TIME              roundOneBreakTime
+             , ROUND_ONE_DOUBLE_TARGET_MITT_CNT  roundOneDoubleTargetMittCnt
+             , ROUND_ONE_LARGE_MITT_CNT          roundOneLargeMittCnt
+             , ROUND_TWO_GAME_TIME               roundTwoGameTime
+             , ROUND_TWO_BREAK_TIME              roundTwoBreakTime
+             , ROUND_TWO_DOUBLE_TARGET_MITT_CNT  roundTwoDoubleTargetMittCnt
+             , ROUND_TWO_LARGE_MITT_CNT          roundTwoLargeMittCnt
+             , ROUND_TREE_GAME_TIME              roundTreeGameTime
+             , ROUND_TREE_BREAK_TIME             roundTreeBreakTime
+             , ROUND_TREE_DOUBLE_TARGET_MITT_CNT roundTreeDoubleTargetMittCnt
+             , ROUND_TREE_LARGE_MITT_CNT         roundTreeLargeMittCnt
+             , ROUND_FOUR_GAME_TIME              roundFourGameTime
+             , ROUND_FOUR_BREAK_TIME             roundFourBreakTime
+             , ROUND_FOUR_DOUBLE_TARGET_MITT_CNT roundFourDoubleTargetMittCnt
+             , ROUND_FOUR_LARGE_MITT_CNT         roundFourLargeMittCnt
+             , ROUND_FIVE_GAME_TIME              roundFiveGameTime
+             , ROUND_FIVE_BREAK_TIME             roundFiveBreakTime
+             , ROUND_FIVE_DOUBLE_TARGET_MITT_CNT roundFiveDoubleTargetMittCnt
+             , ROUND_FIVE_LARGE_MITT_CNT         roundFiveLargeMittCnt
+        FROM TB_WEIGHT_CLASS
+        WHERE EVENT_INDEX = #{eventIndex}
+    </select>
+
+    <delete id="deleteWeightClass" parameterType="int">
+        DELETE
+        FROM TB_WEIGHT_CLASS
+        WHERE WEIGHT_CLASS_INDEX = #{weightClassIndex}
+    </delete>
+
+</mapper>

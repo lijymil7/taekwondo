@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.midashnt.taekwondo.app.mapper.EventMapper">
+
+    <insert id="createEvent" parameterType="Event">
+        INSERT INTO TB_EVENT( COMPETITION_INDEX
+                            , EVENT_NAME_KO
+                            , EVENT_NAME_EN
+                            , EVENT_CLASSIFICATION
+                            , EVENT_TYPE
+                            , EVENT_RATING
+                            , ROUND_CNT
+                            , ROUND_ONE_GAME_TIME
+                            , ROUND_ONE_BREAK_TIME
+                            , ROUND_ONE_DOUBLE_TARGET_MITT_CNT
+                            , ROUND_ONE_LARGE_MITT_CNT
+                            , ROUND_TWO_GAME_TIME
+                            , ROUND_TWO_BREAK_TIME
+                            , ROUND_TWO_DOUBLE_TARGET_MITT_CNT
+                            , ROUND_TWO_LARGE_MITT_CNT
+                            , ROUND_TREE_GAME_TIME
+                            , ROUND_TREE_BREAK_TIME
+                            , ROUND_TREE_DOUBLE_TARGET_MITT_CNT
+                            , ROUND_TREE_LARGE_MITT_CNT
+                            , ROUND_FOUR_GAME_TIME
+                            , ROUND_FOUR_BREAK_TIME
+                            , ROUND_FOUR_DOUBLE_TARGET_MITT_CNT
+                            , ROUND_FOUR_LARGE_MITT_CNT
+                            , ROUND_FIVE_GAME_TIME
+                            , ROUND_FIVE_BREAK_TIME
+                            , ROUND_FIVE_DOUBLE_TARGET_MITT_CNT
+                            , ROUND_FIVE_LARGE_MITT_CNT
+                            , EVENT_ORDER)
+            VALUE (#{competitionIndex}, #{eventNameKO}, #{eventNameEN}, #{eventClassification}, #{eventType}, #{eventRating}, #{roundCnt},
+                   #{roundOneGameTime}, #{roundOneBreakTime}, #{roundOneDoubleTargetMittCnt}, #{roundOneLargeMittCnt},
+                   #{roundTwoGameTime}, #{roundTwoBreakTime}, #{roundTwoDoubleTargetMittCnt}, #{roundTwoLargeMittCnt},
+                   #{roundTreeGameTime}, #{roundTreeBreakTime}, #{roundTreeDoubleTargetMittCnt}, #{roundTreeLargeMittCnt},
+                   #{roundFourGameTime}, #{roundFourBreakTime}, #{roundFourDoubleTargetMittCnt}, #{roundFourLargeMittCnt},
+                   #{roundFiveGameTime}, #{roundFiveBreakTime}, #{roundFiveDoubleTargetMittCnt}, #{roundFiveLargeMittCnt},
+                   #{eventOrder})
+    </insert>
+
+    <update id="updateEvent" parameterType="Event">
+        UPDATE TB_EVENT
+        SET COMPETITION_INDEX = #{competitionIndex}
+        <if test="eventNameKO != null and !eventNameKO.equals('')">
+            , EVENT_NAME_KO = #{eventNameKO}
+        </if>
+        , EVENT_NAME_EN = #{eventNameEN}
+        <if test="eventClassification != 0">
+            , EVENT_CLASSIFICATION = #{eventClassification}
+        </if>
+        <if test="eventType != 0">
+            , EVENT_TYPE = #{eventType}
+        </if>
+        <if test="eventRating != 0">
+            , EVENT_RATING = #{eventRating}
+        </if>
+        <if test="roundCnt != 0">
+            , ROUND_CNT = #{roundCnt}
+        </if>
+        <if test="roundOneGameTime != 0">
+            , ROUND_ONE_GAME_TIME = #{roundOneGameTime}
+        </if>
+        , ROUND_ONE_BREAK_TIME = #{roundOneBreakTime}
+        , ROUND_ONE_DOUBLE_TARGET_MITT_CNT = #{roundOneDoubleTargetMittCnt}
+        , ROUND_ONE_LARGE_MITT_CNT = #{roundOneLargeMittCnt}
+        , ROUND_TWO_GAME_TIME = #{roundTwoGameTime}
+        , ROUND_TWO_BREAK_TIME = #{roundTwoBreakTime}
+        , ROUND_TWO_DOUBLE_TARGET_MITT_CNT = #{roundTwoDoubleTargetMittCnt}
+        , ROUND_TWO_LARGE_MITT_CNT = #{roundTwoLargeMittCnt}
+        , ROUND_TREE_GAME_TIME = #{roundTreeGameTime}
+        , ROUND_TREE_BREAK_TIME = #{roundTreeBreakTime}
+        , ROUND_TREE_DOUBLE_TARGET_MITT_CNT = #{roundTreeDoubleTargetMittCnt}
+        , ROUND_TREE_LARGE_MITT_CNT = #{roundTreeLargeMittCnt}
+        , ROUND_FOUR_GAME_TIME = #{roundFourGameTime}
+        , ROUND_FOUR_BREAK_TIME = #{roundFourBreakTime}
+        , ROUND_FOUR_DOUBLE_TARGET_MITT_CNT = #{roundFourDoubleTargetMittCnt}
+        , ROUND_FOUR_LARGE_MITT_CNT = #{roundFourLargeMittCnt}
+        , ROUND_FIVE_GAME_TIME = #{roundFiveGameTime}
+        , ROUND_FIVE_BREAK_TIME = #{roundFiveBreakTime}
+        , ROUND_FIVE_DOUBLE_TARGET_MITT_CNT = #{roundFiveDoubleTargetMittCnt}
+        , ROUND_FIVE_LARGE_MITT_CNT = #{roundFiveLargeMittCnt}
+        <if test="eventOrder != 0">
+            ,EVENT_ORDER = #{eventOrder}
+        </if>
+        WHERE EVENT_INDEX = #{eventIndex}
+    </update>
+
+    <select id="getEventByIndex" parameterType="int" resultType="Event">
+        SELECT EVENT_INDEX                       eventIndex
+             , COMPETITION_INDEX                 competitionIndex
+             , EVENT_NAME_KO                     eventNameKO
+             , EVENT_NAME_EN                     eventNameEN
+             , EVENT_CLASSIFICATION              eventClassification
+             , EVENT_TYPE                        eventType
+             , EVENT_RATING                      eventRating
+             , ROUND_CNT                         roundCnt
+             , ROUND_ONE_GAME_TIME               roundOneGameTime
+             , ROUND_ONE_BREAK_TIME              roundOneBreakTime
+             , ROUND_ONE_DOUBLE_TARGET_MITT_CNT  roundOneDoubleTargetMittCnt
+             , ROUND_ONE_LARGE_MITT_CNT          roundOneLargeMittCnt
+             , ROUND_TWO_GAME_TIME               roundTwoGameTime
+             , ROUND_TWO_BREAK_TIME              roundTwoBreakTime
+             , ROUND_TWO_DOUBLE_TARGET_MITT_CNT  roundTwoDoubleTargetMittCnt
+             , ROUND_TWO_LARGE_MITT_CNT          roundTwoLargeMittCnt
+             , ROUND_TREE_GAME_TIME              roundTreeGameTime
+             , ROUND_TREE_BREAK_TIME             roundTreeBreakTime
+             , ROUND_TREE_DOUBLE_TARGET_MITT_CNT roundTreeDoubleTargetMittCnt
+             , ROUND_TREE_LARGE_MITT_CNT         roundTreeLargeMittCnt
+             , ROUND_FOUR_GAME_TIME              roundFourGameTime
+             , ROUND_FOUR_BREAK_TIME             roundFourBreakTime
+             , ROUND_FOUR_DOUBLE_TARGET_MITT_CNT roundFourDoubleTargetMittCnt
+             , ROUND_FOUR_LARGE_MITT_CNT         roundFourLargeMittCnt
+             , ROUND_FIVE_GAME_TIME              roundFiveGameTime
+             , ROUND_FIVE_BREAK_TIME             roundFiveBreakTime
+             , ROUND_FIVE_DOUBLE_TARGET_MITT_CNT roundFiveDoubleTargetMittCnt
+             , ROUND_FIVE_LARGE_MITT_CNT         roundFiveLargeMittCnt
+             , EVENT_ORDER                       eventOrder
+        FROM TB_EVENT
+        WHERE EVENT_INDEX = #{eventIndex}
+    </select>
+
+    <select id="getEventListByCompetitionIndex" parameterType="int" resultType="Event">
+        SELECT EVENT_INDEX                       eventIndex
+             , COMPETITION_INDEX                 competitionIndex
+             , EVENT_NAME_KO                     eventNameKO
+             , EVENT_NAME_EN                     eventNameEN
+             , EVENT_CLASSIFICATION              eventClassification
+             , EVENT_TYPE                        eventType
+             , EVENT_RATING                      eventRating
+             , ROUND_CNT                         roundCnt
+             , ROUND_ONE_GAME_TIME               roundOneGameTime
+             , ROUND_ONE_BREAK_TIME              roundOneBreakTime
+             , ROUND_ONE_DOUBLE_TARGET_MITT_CNT  roundOneDoubleTargetMittCnt
+             , ROUND_ONE_LARGE_MITT_CNT          roundOneLargeMittCnt
+             , ROUND_TWO_GAME_TIME               roundTwoGameTime
+             , ROUND_TWO_BREAK_TIME              roundTwoBreakTime
+             , ROUND_TWO_DOUBLE_TARGET_MITT_CNT  roundTwoDoubleTargetMittCnt
+             , ROUND_TWO_LARGE_MITT_CNT          roundTwoLargeMittCnt
+             , ROUND_TREE_GAME_TIME              roundTreeGameTime
+             , ROUND_TREE_BREAK_TIME             roundTreeBreakTime
+             , ROUND_TREE_DOUBLE_TARGET_MITT_CNT roundTreeDoubleTargetMittCnt
+             , ROUND_TREE_LARGE_MITT_CNT         roundTreeLargeMittCnt
+             , ROUND_FOUR_GAME_TIME              roundFourGameTime
+             , ROUND_FOUR_BREAK_TIME             roundFourBreakTime
+             , ROUND_FOUR_DOUBLE_TARGET_MITT_CNT roundFourDoubleTargetMittCnt
+             , ROUND_FOUR_LARGE_MITT_CNT         roundFourLargeMittCnt
+             , ROUND_FIVE_GAME_TIME              roundFiveGameTime
+             , ROUND_FIVE_BREAK_TIME             roundFiveBreakTime
+             , ROUND_FIVE_DOUBLE_TARGET_MITT_CNT roundFiveDoubleTargetMittCnt
+             , ROUND_FIVE_LARGE_MITT_CNT         roundFiveLargeMittCnt
+             , EVENT_ORDER                       eventOrder
+        FROM TB_EVENT
+        WHERE COMPETITION_INDEX = #{competitionIndex}
+        ORDER BY EVENT_ORDER
+    </select>
+
+    <select id="getEventMapListByCompetitionIndex" parameterType="int" resultType="Map">
+        SELECT EVENT_INDEX          eventIndex
+             , COMPETITION_INDEX    competitionIndex
+             , EVENT_NAME_KO        eventNameKO
+             , EVENT_NAME_EN        eventNameEN
+             , EVENT_CLASSIFICATION eventClassification
+             , EVENT_TYPE           eventType
+             , EVENT_RATING         eventRating
+        FROM TB_EVENT
+        WHERE COMPETITION_INDEX = #{competitionIndex}
+    </select>
+
+    <delete id="deleteEvent" parameterType="int">
+        DELETE
+        FROM TB_EVENT
+        WHERE EVENT_INDEX = #{eventIndex}
+    </delete>
+
+</mapper>
